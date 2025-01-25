@@ -27,10 +27,16 @@ def main():
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                return
-        
+                return      
+
         for ob in updatable:
             ob.update(dt)
+        
+        for ob in asteroids:
+            for sho in shots:
+                if sho.is_collide(ob):
+                    sho.kill()
+                    ob.split()
         
         for ob in asteroids:
             if ob.is_collide(player):
